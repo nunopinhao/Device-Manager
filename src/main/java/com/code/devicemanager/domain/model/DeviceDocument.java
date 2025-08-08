@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -16,5 +18,5 @@ public class DeviceDocument {
     private String name;
     private String brand;
     private String state;
-    private OffsetDateTime creationTime;
+    private LocalDateTime creationTime;
 }

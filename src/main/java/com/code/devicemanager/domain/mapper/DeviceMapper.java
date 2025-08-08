@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.AfterMapping;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Mapper(componentModel = "spring")
@@ -21,7 +21,7 @@ public interface DeviceMapper {
     @AfterMapping
     default void setIdAndCreationTime(@MappingTarget DeviceDocument deviceDocument) {
         deviceDocument.setId(UUID.randomUUID().toString());
-        deviceDocument.setCreationTime(OffsetDateTime.now());
+        deviceDocument.setCreationTime(LocalDateTime.now());
     }
 
     DeviceResponseDto deviceDocumentToResponse(DeviceDocument deviceDocument);

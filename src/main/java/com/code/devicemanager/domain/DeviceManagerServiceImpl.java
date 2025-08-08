@@ -17,7 +17,7 @@ public class DeviceManagerServiceImpl implements DeviceManagerService {
     @Override
     public DeviceResponseDto createDevice(DeviceRequestDto deviceRequestDto) {
         DeviceDocument deviceDocument = deviceMapper.deviceRequestToDocument(deviceRequestDto);
-        //deviceManagerRepository.save(deviceDocument);
+        deviceManagerRepository.save(deviceDocument);
         return deviceMapper.deviceDocumentToResponse(deviceDocument);
     }
 

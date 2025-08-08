@@ -116,6 +116,13 @@
                                 <booleanGetterPrefix>is</booleanGetterPrefix>
                                 <useTags>true</useTags>
                             </configOptions>
+                            <typeMappings>
+                                <!-- Map date-time fields to LocalDateTime. -->
+                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                            </typeMappings>
+                            <importMappings>
+                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                            </importMappings>
                         </configuration>
                     </execution>
                 </executions>
