@@ -17,4 +17,13 @@ public class GlobalExceptionHandler {
         error.setStatus(HttpStatus.BAD_REQUEST.value());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(error);
     }
+
+
+    @ExceptionHandler(DeviceNotFoundException.class)
+    public ResponseEntity<Object> handleDeviceNotFound(DeviceNotFoundException ex) {
+        Error error = new Error(ErrorCode.DEVICE_NOT_FOUND.getCode(), "Device not found");
+        error.setMessage(ex.getMessage());
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(error);
+    }
 }

@@ -5,9 +5,9 @@ import com.code.devicemanager.model.DeviceState;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreateDeviceValidator {
+public class DeviceValidator {
 
-    public void validate(DeviceRequestDto deviceRequestDto) {
+    public void validateCreateDevice(DeviceRequestDto deviceRequestDto) {
         if (deviceRequestDto.getName() == null || deviceRequestDto.getName().isEmpty()) {
             throw new IllegalArgumentException("Name must not be empty");
         }
@@ -18,6 +18,16 @@ public class CreateDeviceValidator {
             //if ommited, set to AVAILABLE
             deviceRequestDto.setState(DeviceState.AVAILABLE.getValue());
         }
+        validateState(deviceRequestDto);
+    }
+
+    public void validateUpdateDevice(DeviceRequestDto deviceRequestDto) {
+        if (deviceRequestDto.getState() != null) {
+            validateState(deviceRequestDto);
+        }
+    }
+
+    private static void validateState(DeviceRequestDto deviceRequestDto) {
         try {
             DeviceState.fromValue(deviceRequestDto.getState());
         } catch (IllegalArgumentException ex) {

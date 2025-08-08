@@ -32,11 +32,11 @@ public class DeviceManagerController implements DeviceApi {
 
     @Override
     public ResponseEntity<DeviceResponseDto> v1FetchDeviceById(String id) {
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(deviceManagerService.fetchDeviceById(id));
     }
 
     @Override
     public ResponseEntity<DeviceResponseDto> v1UpdateDeviceById(String id, DeviceRequestDto deviceRequestDto) {
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(deviceManagerService.updateDevice(id, deviceRequestDto));
     }
 }

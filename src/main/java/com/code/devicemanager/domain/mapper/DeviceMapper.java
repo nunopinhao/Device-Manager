@@ -22,6 +22,9 @@ public interface DeviceMapper {
     @Mapping(target = "state", source = "state", qualifiedByName = "mapStringToDeviceState")
     DeviceDocument deviceRequestToDocument(DeviceRequestDto deviceRequestDto);
 
+    @Mapping(target = "state", source = "state", qualifiedByName = "mapStringToDeviceState")
+    DeviceResponseDto deviceDocumentToResponse(DeviceDocument deviceDocument);
+
     @AfterMapping
     default void setIdAndCreationTime(@MappingTarget DeviceDocument deviceDocument) {
         deviceDocument.setId(UUID.randomUUID().toString());
@@ -33,5 +36,6 @@ public interface DeviceMapper {
         return DeviceState.fromValue(value);
     }
 
-    DeviceResponseDto deviceDocumentToResponse(DeviceDocument deviceDocument);
 }
+
+
