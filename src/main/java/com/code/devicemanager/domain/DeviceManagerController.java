@@ -26,8 +26,8 @@ public class DeviceManagerController implements DeviceApi {
     }
 
     @Override
-    public ResponseEntity<List<DeviceResponseDto>> v1FetchAllDevices(String brand, String state) {
-        return null;
+    public ResponseEntity<List<DeviceResponseDto>> v1FetchDevices(String brand, String state) {
+        return ResponseEntity.status(HttpStatus.OK).body(deviceManagerService.fetchDevices(brand, state));
     }
 
     @Override

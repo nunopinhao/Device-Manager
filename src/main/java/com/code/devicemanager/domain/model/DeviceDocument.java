@@ -1,13 +1,12 @@
 package com.code.devicemanager.domain.model;
 
+import com.code.devicemanager.model.DeviceState;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Getter
 @Setter
@@ -17,6 +16,6 @@ public class DeviceDocument {
     private String id;
     private String name;
     private String brand;
-    private String state;
+    private DeviceState state;
     private LocalDateTime creationTime;
 }

@@ -11,8 +11,8 @@ paths:
     get:
       tags:
         - Device
-      summary: Fetch all devices.
-      operationId: v1FetchAllDevices
+      summary: Fetch devices.
+      operationId: v1FetchDevices
       parameters:
         - name: brand
           in: query

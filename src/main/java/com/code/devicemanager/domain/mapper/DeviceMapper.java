@@ -22,7 +22,6 @@ public interface DeviceMapper {
     @Mapping(target = "state", source = "state", qualifiedByName = "mapStringToDeviceState")
     DeviceDocument deviceRequestToDocument(DeviceRequestDto deviceRequestDto);
 
-    @Mapping(target = "state", source = "state", qualifiedByName = "mapStringToDeviceState")
     DeviceResponseDto deviceDocumentToResponse(DeviceDocument deviceDocument);
 
     @AfterMapping
