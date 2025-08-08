@@ -1,0 +1,4 @@
+server:
+  servlet.context-path: /api/device-manager/
+  port: 8086
+  ssl.enabled: false
