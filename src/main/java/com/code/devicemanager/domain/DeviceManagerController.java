@@ -1,21 +1,23 @@
 package com.code.devicemanager.domain;
 
 import com.code.devicemanager.api.DeviceApi;
-import com.code.devicemanager.model.DeviceDto;
 import com.code.devicemanager.model.DeviceRequestDto;
+import com.code.devicemanager.model.DeviceResponseDto;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class DeviceManagerController implements DeviceApi {
+    private final DeviceManagerService deviceManagerService;
 
     @Override
-    public ResponseEntity<DeviceDto> v1CreateDevice(DeviceRequestDto deviceRequestDto) {
-        return null;
+    public ResponseEntity<DeviceResponseDto> v1CreateDevice(DeviceRequestDto deviceRequestDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(deviceManagerService.createDevice(deviceRequestDto));
     }
 
     @Override
@@ -24,22 +26,17 @@ public class DeviceManagerController implements DeviceApi {
     }
 
     @Override
-    public ResponseEntity<List<DeviceDto>> v1FetchAllDevices() {
+    public ResponseEntity<List<DeviceResponseDto>> v1FetchAllDevices(String brand, String state) {
         return null;
     }
 
     @Override
-    public ResponseEntity<DeviceDto> v1FetchDeviceById(String id) {
+    public ResponseEntity<DeviceResponseDto> v1FetchDeviceById(String id) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<DeviceDto>> v1FetchDevicesByCategory(String category) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<DeviceDto> v1UpdateDeviceById(String id, DeviceRequestDto deviceRequestDto) {
+    public ResponseEntity<DeviceResponseDto> v1UpdateDeviceById(String id, DeviceRequestDto deviceRequestDto) {
         return null;
     }
 }

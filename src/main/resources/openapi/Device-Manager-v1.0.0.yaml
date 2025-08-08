@@ -13,6 +13,23 @@ paths:
         - Device
       summary: Fetch all devices.
       operationId: v1FetchAllDevices
+      parameters:
+        - name: brand
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter devices by brand.
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - available
+              - in-use
+              - inactive
+          description: Filter devices by state.
       responses:
         '200':
           description: Ok
@@ -21,7 +38,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Device'
+                  $ref: '#/components/schemas/DeviceResponseDto'
         '400':
           description: Bad Request
           content:
@@ -74,14 +91,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeviceRequest'
+              $ref: '#/components/schemas/DeviceRequestDto'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/Device"
+                "$ref": "#/components/schemas/DeviceResponseDto"
         '400':
           description: Bad Request
           content:
@@ -124,7 +141,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-
   "/v1/device/{id}":
     get:
       tags:
@@ -144,7 +160,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Device'
+                $ref: '#/components/schemas/DeviceResponseDto'
         '400':
           description: Bad Request
           content:
@@ -204,14 +220,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeviceRequest'
+              $ref: '#/components/schemas/DeviceRequestDto'
       responses:
         '200':
           description: Ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Device'
+                $ref: '#/components/schemas/DeviceResponseDto'
         '400':
           description: Bad Request
           content:
@@ -311,73 +327,9 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Error"
-  "/v1/device/category/{category}":
-    get:
-      tags:
-        - Device
-      summary: Fetch devices by category.
-      operationId: v1FetchDevicesByCategory
-      parameters:
-        - name: category
-          in: path
-          required: true
-          schema:
-            type: string
-          description: Category of the device.
-      responses:
-        '200':
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Device'
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        '405':
-          description: Method Not allowed
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        '409':
-          description: Conflict
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/Error"
 components:
   schemas:
-    Device:
+    DeviceResponseDto:
       type: object
       properties:
         id:
@@ -390,13 +342,12 @@ components:
           type: string
           description: "Brand of the device."
         state:
-          type: string
-          description: "State of the device."
+          $ref: '#/definitions/DeviceState'
         creationTime:
           type: string
           format: date-time
           description: "Timestamp when the device was created."
-    DeviceRequest:
+    DeviceRequestDto:
       type: object
       properties:
         name:
@@ -406,8 +357,14 @@ components:
           type: string
           description: "Brand of the device."
         state:
-          type: string
-          description: "State of the device."
+          $ref: '#/definitions/DeviceState'
+    DeviceState:
+      type: string
+      enum:
+        - available
+        - in-use
+        - inactive
+      description: "State of the device."
     Error:
       required:
         - code
