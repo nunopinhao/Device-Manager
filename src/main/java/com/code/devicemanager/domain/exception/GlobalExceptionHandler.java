@@ -18,12 +18,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(error);
     }
 
-
     @ExceptionHandler(DeviceNotFoundException.class)
     public ResponseEntity<Object> handleDeviceNotFound(DeviceNotFoundException ex) {
         Error error = new Error(ErrorCode.DEVICE_NOT_FOUND.getCode(), "Device not found");
         error.setMessage(ex.getMessage());
         error.setStatus(HttpStatus.NOT_FOUND.value());
         return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(error);
+    }
+
+    @ExceptionHandler(DeviceInUseException.class)
+    public ResponseEntity<Object> handleDeviceInUse(DeviceInUseException ex) {
+        Error error = new Error(ErrorCode.DEVICE_IN_USE.getCode(), "Device is in use.");
+        error.setMessage(ex.getMessage());
+        error.setStatus(HttpStatus.CONFLICT.value());
+        return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(error);
     }
 }

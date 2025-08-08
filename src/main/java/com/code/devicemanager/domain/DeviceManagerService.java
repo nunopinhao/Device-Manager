@@ -14,4 +14,6 @@ public interface DeviceManagerService {
     DeviceResponseDto fetchDeviceById(String deviceId);
 
     List<DeviceResponseDto> fetchDevices(String brand, String state);
+
+    void deleteDevice(String deviceId);
 }

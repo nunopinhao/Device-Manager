@@ -22,6 +22,7 @@ public class DeviceManagerController implements DeviceApi {
 
     @Override
     public ResponseEntity<Void> v1DeleteDevice(String id) {
+        deviceManagerService.
         return ResponseEntity.noContent().build();
     }
 

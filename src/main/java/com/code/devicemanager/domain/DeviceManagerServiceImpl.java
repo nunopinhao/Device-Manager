@@ -1,5 +1,7 @@
 package com.code.devicemanager.domain;
 
+import com.code.devicemanager.domain.exception.DeviceInUseException;
+import com.code.devicemanager.domain.exception.DeviceNotFoundException;
 import com.code.devicemanager.domain.mapper.DeviceMapper;
 import com.code.devicemanager.domain.model.DeviceDocument;
 import com.code.devicemanager.domain.repository.DeviceManagerRepository;
@@ -57,7 +59,7 @@ public class DeviceManagerServiceImpl implements DeviceManagerService {
     @Override
     public List<DeviceResponseDto> fetchDevices(String brand, String state) {
         DeviceState deviceState = convertState(state);
-        List<DeviceDocument> devices = List.of();
+        List<DeviceDocument> devices;
         if (brand != null && state != null) {
             devices = deviceManagerRepository.findByBrandAndState(brand, deviceState);
         } else if (brand != null) {
@@ -70,6 +72,15 @@ public class DeviceManagerServiceImpl implements DeviceManagerService {
         return devices.stream()
                 .map(deviceMapper::deviceDocumentToResponse)
                 .toList();
+    }
+
+    @Override
+    public void deleteDevice(String deviceId) {
+        DeviceDocument deviceDocument = getDeviceDocumentById(deviceId);
+        if (DeviceState.IN_USE.equals(deviceDocument.getState())) {
+            throw new DeviceInUseException("Cannot delete device that is currently in use");
+        }
+        deviceManagerRepository.delete(deviceDocument);
     }
 
     private static DeviceState convertState(String state) {
@@ -93,14 +104,14 @@ public class DeviceManagerServiceImpl implements DeviceManagerService {
 
     private DeviceDocument getDeviceDocumentById(String deviceId) {
         return deviceManagerRepository.findById(deviceId)
-                .orElseThrow(() -> new IllegalArgumentException("Device not found with id: " + deviceId));
+                .orElseThrow(() -> new DeviceNotFoundException("Device not found with id: " + deviceId));
     }
 
     private void validateUpdateNotAllowedWhenInUse(DeviceDocument deviceDocument, DeviceRequestDto deviceRequestDto) {
         if (DeviceState.IN_USE.equals(deviceDocument.getState())) {
             if ((deviceRequestDto.getBrand() != null && !deviceRequestDto.getBrand().equals(deviceDocument.getBrand())) ||
                     (deviceRequestDto.getName() != null && !deviceRequestDto.getName().equals(deviceDocument.getName()))) {
-                throw new IllegalArgumentException("Cannot update brand or name when device state is IN_USE");
+                throw new DeviceInUseException("Cannot update brand or name when device state is in use.");
             }
         }
     }

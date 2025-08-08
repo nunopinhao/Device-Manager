@@ -7,6 +7,7 @@ public enum ErrorCode {
 
     INVALID_INPUT("DM-001"),
     DEVICE_NOT_FOUND("DM-002"),
+    DEVICE_IN_USE("DM-003")
     ;
 
     private final String code;
