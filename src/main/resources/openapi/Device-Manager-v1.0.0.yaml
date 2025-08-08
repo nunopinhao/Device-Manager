@@ -357,7 +357,8 @@ components:
           type: string
           description: "Brand of the device."
         state:
-          $ref: '#/definitions/DeviceState'
+          type: string
+          description: "State of the device."
     DeviceState:
       type: string
       enum:
@@ -372,7 +373,7 @@ components:
       type: object
       properties:
         code:
-          type: integer
+          type: string
           description: Application related code.
         reason:
           type: string
@@ -384,13 +385,3 @@ components:
         status:
           type: integer
           description: "(optional) http error code extension like 400-2"
-        referenceError:
-          type: string
-          description: "(optional) A URL to online documentation that provides more
-            information about the error."
-        type:
-          type: string
-          description: "(optional) The class type of a REST resource."
-        schemaLocation:
-          type: string
-          description: "(optional) A link to the schema describing a REST resource."
