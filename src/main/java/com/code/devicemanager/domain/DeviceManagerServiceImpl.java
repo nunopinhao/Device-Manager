@@ -36,7 +36,6 @@ public class DeviceManagerServiceImpl implements DeviceManagerService {
 
         validateUpdateNotAllowedWhenInUse(deviceDocument, deviceRequestDto);
 
-        // Update allowed fields
         if (deviceRequestDto.getBrand() != null) {
             deviceDocument.setBrand(deviceRequestDto.getBrand());
         }
@@ -115,6 +114,4 @@ public class DeviceManagerServiceImpl implements DeviceManagerService {
             }
         }
     }
-
-
 }
