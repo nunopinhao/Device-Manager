@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "3c3c84ed-4c0b-499d-b5ca-0c6351f835fa",
+		"name": "DeviceManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17354074"
+	},
+	"item": [
+		{
+			"name": "deleteDevice",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8086/api/device-manager/v1/device/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"api",
+						"device-manager",
+						"v1",
+						"device",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createDevice",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Iphone 8\",\n    \"brand\": \"Apple\",\n    \"state\": \"inactive\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/device-manager/v1/device",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"device-manager",
+						"v1",
+						"device"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetchDeviceById",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8086/api/device-manager/v1/device/4504b471-6ebf-4b05-bff6-e43e77cbefe6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"api",
+						"device-manager",
+						"v1",
+						"device",
+						"4504b471-6ebf-4b05-bff6-e43e77cbefe6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetchAllDevices",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8086/api/device-manager/v1/device/4504b471-6ebf-4b05-bff6-e43e77cbefe6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"api",
+						"device-manager",
+						"v1",
+						"device",
+						"4504b471-6ebf-4b05-bff6-e43e77cbefe6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateDevice",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"balelas\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8086/api/device-manager/v1/device/4504b471-6ebf-4b05-bff6-e43e77cbefe6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8086",
+					"path": [
+						"api",
+						"device-manager",
+						"v1",
+						"device",
+						"4504b471-6ebf-4b05-bff6-e43e77cbefe6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
