@@ -40,8 +40,6 @@ class DeviceManagerControllerTest {
     DeviceManagerControllerTest() throws Exception {
     }
 
-    // In DeviceManagerControllerTest.java
-
     @Test
     void deviceManagerController_integration() throws Exception {
         String id = createDeviceAndReturnId(AVAILABLE, SAMSUNG, GALAXY_S21);

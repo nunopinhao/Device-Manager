@@ -1,0 +1,9 @@
+server:
+  servlet.context-path: /api/device-manager/
+  port: 8080
+  ssl.enabled: false
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongodb:27017/device
